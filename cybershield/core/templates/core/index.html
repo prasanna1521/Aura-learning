@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- బ్రౌజర్ ట्याబ్ టైటిల్ -->
+    <title>Aura Learning - Quiz</title>
+    <!-- అందమైన డిజైన్ కోసం Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- 1. NAVBAR SECTION -->
+    <nav class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-4 shadow-lg">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <!-- ఇక్కడ నీ కొత్త పేరు పక్కాగా సెట్ అయిపోతుంది -->
+            <span class="text-white font-bold text-2xl tracking-wide">Aura Learning</span>
+            <span class="text-white text-sm bg-white/20 px-3 py-1 rounded-full">Step: {{ question.step }}</span>
+        </div>
+    </nav>
+
+    <!-- 2. MAIN QUIZ CONTAINER -->
+    <main class="max-w-2xl mx-auto my-8 p-6 bg-white rounded-2xl shadow-xl flex-grow w-full">
+        
+        <!-- ఇమేజ్ బాక్స్ (మనం క్రియेट చేసిన ఆరెంజ్ SVG ఇమేజ్ ఇక్కడ లోడ్ అవుతుంది) -->
+        {% if question.image_url %}
+        <div class="mb-6 rounded-xl overflow-hidden shadow-md flex justify-center bg-gray-50 p-2">
+            <img src="{{ question.image_url }}" alt="Quiz Image" class="max-h-64 object-contain rounded-lg">
+        </div>
+        {% endif %}
+
+        <!-- ప్రశ్న సెక్షన్ -->
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold text-gray-800 leading-relaxed">{{ question.question }}</h2>
+        </div>
+
+        <!-- ఆప్షన్స్ (మల్టిపుల్ ఛాయిస్ బటన్స్) -->
+        <form action="/submit" method="POST" class="space-y-3">
+            <input type="hidden" name="step" value="{{ question.step }}">
+            
+            {% for option in question.options %}
+            <button type="submit" name="answer" value="{{ option }}" 
+                    class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:bg-purple-50 transition-all font-medium text-gray-700 cursor-pointer">
+                {{ option }}
+            </button>
+            {% endfor %}
+        </form>
+
+    </main>
+
+    <!-- 3. FOOTER SECTION -->
+    <footer class="bg-gray-800 p-4 text-center text-gray-400 text-xs">
+        &copy; 2026 Aura Learning. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
