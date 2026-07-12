@@ -1,0 +1,16 @@
+# Node.js
+node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+.env
+
+# Django database (optional)
+db.sqlite3
+
+# VS Code
+.vscode/
